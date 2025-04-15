@@ -9,6 +9,7 @@ import { NgIf } from '@angular/common';
 import { AuthService } from '../auth-service';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
+import Swal from 'sweetalert2';
 
 let initialEmailValue = '';
 const savedForm = localStorage.getItem('saved-login-form');
@@ -80,7 +81,15 @@ export class LoginComponent implements OnInit {
           // console.log('repsonse ', res.token);
 
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/']); //redirect home or dashboard
+          Swal.fire({
+            icon: 'success',
+            text: 'Siz muvaffaqiyatli kidringiz.',
+            draggable: true,
+            timer: 1000,
+          }).then(() => {
+            this.router.navigate(['/']); //redirect home or dashboard
+          });
+          return this.loginForm.reset();
         },
         error: (err) => {
           // console.log('error ', err.error);

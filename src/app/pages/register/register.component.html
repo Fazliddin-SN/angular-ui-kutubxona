@@ -1,1 +1,75 @@
-<p>register works!</p>
+<div class="form-control">
+  <h3>Ro'yxatdan O'tishingiz Mumkin.</h3>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="fullname">Ism-Familiya:</label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        formControlName="fullname"
+      />
+      <p *ngIf="fullNameIsInvalid">
+        Ism-Familiya kamida 4 harfdan iborat bo'lishi kerak.
+      </p>
+    </div>
+    <div>
+      <label for="username">Foydalanuvchi Nomi</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        formControlName="username"
+      />
+      <p *ngIf="userNameIsInvalid">
+        Foydalanuvchi nomi kamida 3 harfdan iborat bo'lishi kerak.
+      </p>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" formControlName="email" />
+      <p *ngIf="emailIsValid">Iltmimos yaroqli email kiriting.</p>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+      />
+      <p *ngIf="passwordIsInvalid">
+        Parol kamida 6 harf belgidan shuning bitta katta harf va raqamdan iborat
+        bo'lishi kerak.
+      </p>
+    </div>
+    <div>
+      <label for="address">Address</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        formControlName="address"
+      />
+      <p *ngIf="addressIsInvalid">Iltimos yaroqli Manzil kiriting.</p>
+    </div>
+    <div>
+      <label for="phonen_umber">Tel Raqam:</label>
+      <input
+        type="tel"
+        id="phone_number"
+        name="phone_number"
+        formControlName="phone_number"
+        placeholder="+998955555555"
+      />
+      <p *ngIf="phoneNumberIsInvalid">
+        Iltmimos namunada ko'rsatilgandek telefon raqam kiriting.
+      </p>
+    </div>
+
+    <button type="submit">Ro'yxatdan o'tish</button>
+    @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+    }
+  </form>
+</div>
