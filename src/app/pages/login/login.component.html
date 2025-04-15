@@ -5,6 +5,9 @@
     <div class="control">
       <label for="email">Email:</label>
       <input type="text" name="email" id="email" formControlName="email" />
+      <p *ngIf="emailIsInvalid" class="error-msg">
+        Iltmimos yaroqli email kiriting!
+      </p>
     </div>
     <div class="control">
       <label for="password">Password:</label>
@@ -14,7 +17,14 @@
         id="password"
         formControlName="password"
       />
+      <p class="error-msg" *ngIf="passwordIsInvalid">
+        Password kamida 6 harf-belgidan iborat bo'lishi kerak!
+      </p>
     </div>
     <button type="submit">Login</button>
+
+    @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+    }
   </form>
 </div>

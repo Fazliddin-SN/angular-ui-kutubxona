@@ -1,12 +1,14 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { NgIf } from '@angular/common';
 import { AuthService } from '../auth-service';
 import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 
 let initialEmailValue = '';
 const savedForm = localStorage.getItem('saved-login-form');
@@ -17,17 +19,18 @@ if (savedForm) {
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   //
-  private auhtService = inject(AuthService);
+  private authService = inject(AuthService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
 
   errorMessage: string = '';
+
   loginForm = new FormGroup({
     email: new FormControl(initialEmailValue, {
       validators: [Validators.email, Validators.required],
@@ -53,25 +56,43 @@ export class LoginComponent {
     );
   }
 
+  ngOnInit(): void {
+    const subscription = this.loginForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe({
+        next: (value) => {
+          window.localStorage.setItem(
+            'saved-login-form',
+            JSON.stringify({ email: value.email })
+          );
+        },
+      });
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
+  }
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.auhtService.login(email!, password!).subscribe({
+      const subscription = this.authService.login(email!, password!).subscribe({
         next: (res) => {
           //save token
-          console.log('repsonse ', res);
+          // console.log('repsonse ', res.token);
 
           localStorage.setItem('token', res.token);
           this.router.navigate(['/']); //redirect home or dashboard
         },
         error: (err) => {
-          console.log('error ', err);
+          // console.log('error ', err.error);
 
-          this.errorMessage =
-            err.err?.message || 'Login failed. Please try again.';
+          this.errorMessage = err.error.error;
+          // console.log(this.errorMessage);
         },
       });
+      this.destroyRef.onDestroy(() => {
+        subscription.unsubscribe();
+      });
     }
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
   }
 }
