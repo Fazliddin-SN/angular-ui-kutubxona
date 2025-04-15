@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { LandingComponent } from './pages/landing/landing.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -11,6 +12,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
