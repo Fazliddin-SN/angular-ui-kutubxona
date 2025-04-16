@@ -17,10 +17,16 @@ export interface DecodedToken {
 export class AuthService {
   private baseUrl: string;
   private http = inject(HttpClient);
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+  isloggedIn$ = this.loggedIn.asObservable();
 
   constructor(private config: GlobalConfigService) {
     this.baseUrl = this.config.baseUrl;
     console.log(this.baseUrl);
+  }
+  // Check if token exists initially
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');
   }
 
   login(email: string, password: string): Observable<any> {
@@ -58,6 +64,7 @@ export class AuthService {
 
     try {
       const decoded = jwtDecode<DecodedToken>(token);
+      // console.log(decoded.role);
       return decoded.role;
     } catch (error) {
       return null;
@@ -65,12 +72,16 @@ export class AuthService {
   }
 
   // check if user logs in
-  isLoggedIn() {
-    return this.getToken();
+  isLoggedIn(): boolean {
+    if (this.getToken()) {
+      return true;
+    }
+    return false;
   }
 
   // logout functio
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
+    this.loggedIn.next(false);
   }
 }

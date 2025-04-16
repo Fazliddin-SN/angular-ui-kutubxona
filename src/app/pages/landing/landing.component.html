@@ -1,17 +1,8 @@
-<nav class="navbar">
-  <div class="navbar-left">
-    <button routerLink="/">Home</button>
-  </div>
-  <div class="navbar-right">
-    @if (!isAuthenticated) {
-    <button routerLink="/login">Login</button>
-    <button routerLink="/register">Register</button>
-    }
-    <button *ngIf="isAuthenticated" (click)="onLogout()">Logout</button>
-  </div>
-</nav>
-
-<div class="landing-container">
-  <h1>📚 Library Management System</h1>
-  <p>Welcome! Please login or register to continue.</p>
+<div class="landing-page">
+  <h1>Welcome to the Library Management System!</h1>
+  <p>
+    Our system provides an easy way to manage your library. Whether you're a
+    user, an owner, or an administrator, we have tailored features to meet your
+    needs.
+  </p>
 </div>

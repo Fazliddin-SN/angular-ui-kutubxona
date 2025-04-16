@@ -1,11 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../../services/auth-service';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink, NgIf],
+  imports: [],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
 })

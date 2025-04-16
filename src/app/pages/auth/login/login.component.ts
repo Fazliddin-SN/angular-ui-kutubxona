@@ -6,10 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { AuthService } from '../auth-service';
+
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../services/auth-service';
 
 let initialEmailValue = '';
 const savedForm = localStorage.getItem('saved-login-form');
@@ -81,6 +82,24 @@ export class LoginComponent implements OnInit {
           // console.log('repsonse ', res.token);
 
           localStorage.setItem('token', res.token);
+          // storing logged user's role here
+          const role = this.authService.getUserRole();
+          // console.log('role ', role);
+
+          // as user logs in, they are navigated according to their roles
+          switch (role) {
+            case 'admin':
+              this.router.navigate(['/dashboard/admin']);
+              break;
+            case 'owner':
+              this.router.navigate(['/dashboard/owner']);
+              break;
+            case 'user':
+              this.router.navigate(['/dashboard/user']);
+              break;
+            default:
+              this.router.navigate(['/unauthorized']);
+          }
           Swal.fire({
             icon: 'success',
             text: 'Siz muvaffaqiyatli kidringiz.',

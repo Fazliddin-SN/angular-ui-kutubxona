@@ -1,0 +1,63 @@
+/* Header container styling */
+.header-container {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(to right, #1abc9c, #16a085);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Spacer takes up remaining space */
+.spacer {
+  flex: 1;
+}
+
+/* Navigation styling */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Navigation link styling */
+/* nav {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.3s ease;
+} */
+
+nav a:hover,
+nav a.active {
+  color: #f1f1f1;
+  transform: scale(1.05);
+  background-color: #033a32;
+}
+
+/* Logout button styling */
+nav button,
+a {
+  background: transparent;
+  display: inline-block;
+  border: 1px solid #fff;
+  margin: 10px;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #fff;
+  color: #1abc9c;
+  transform: scale(1.05);
+}
