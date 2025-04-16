@@ -1,7 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { GlobalConfigService } from '../global-config.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+// decoded token interface (type)
+export interface DecodedToken {
+  id: string;
+  email: string;
+  role: 'user' | 'admin' | 'owner';
+  exp: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +42,35 @@ export class AuthService {
       address,
       phone_number,
     });
+  }
+
+  // getting token from localstorage
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // getting user role from decoded token
+  getUserRole(): 'user' | 'admin' | 'owner' | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const decoded = jwtDecode<DecodedToken>(token);
+      return decoded.role;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  // check if user logs in
+  isLoggedIn() {
+    return this.getToken();
+  }
+
+  // logout functio
+  logout() {
+    localStorage.removeItem('token');
   }
 }

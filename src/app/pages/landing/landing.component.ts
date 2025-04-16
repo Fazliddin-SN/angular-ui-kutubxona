@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth-service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink],
+  imports: [RouterLink, NgIf],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
 })
-export class LandingComponent {}
+export class LandingComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  // check if user is authenticated
+  get isAuthenticated() {
+    return this.authService.isLoggedIn();
+  }
+  // logout function
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+}

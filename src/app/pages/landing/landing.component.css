@@ -1,24 +1,80 @@
+/* Global body styling with a gentle gradient background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e2e2e2, #ffffff);
+}
+
+/* Navbar container using Flexbox for layout */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #1abc9c, #16a085);
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Left side: Home button */
+.navbar-left button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-left button:hover {
+  transform: scale(1.05);
+  color: #f8f8f8;
+}
+
+/* Right side: Login, Register, and Logout buttons */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-right button:hover {
+  transform: scale(1.05);
+  color: #f8f8f8;
+}
+
+/* Landing container styling */
 .landing-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px;
   text-align: center;
-  margin-top: 10vh;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
+/* Heading in landing container */
+.landing-container h1 {
+  font-size: 3em;
+  font-family: "Georgia", serif;
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-
-    button {
-      min-width: 120px;
-    }
-  }
+/* Landing paragraph styling */
+.landing-container p {
+  font-size: 1.2em;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
 }
