@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   private router = inject(Router);
 
   errorMessage: string = '';
-
+  // create login form with reactive and validative
   loginForm = new FormGroup({
     email: new FormControl(initialEmailValue, {
       validators: [Validators.email, Validators.required],

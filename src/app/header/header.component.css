@@ -1,63 +1,157 @@
-/* Header container styling */
-.header-container {
+/* 1. Make the layout wrapper only responsible for stacking main + allowing sidebar-open state */
+.layout {
+  /* no more flex-calculations of aside width */
+  position: relative; /* to scope absolutely-positioned sidebar */
+  /* height: 100vw;
+  overflow: hidden; */
+}
+
+/* 2. Sidebar – absolutely positioned off-canvas */
+.sidebar {
+  position: absolute; /* remove from document flow */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #1a8f7f;
+  color: #fff;
+  transform: translateX(-100%); /* fully hidden to the left */
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+/* 3. When open, slide sidebar in */
+.layout--sidebar-open .sidebar {
+  transform: translateX(0);
+}
+
+/* 4. Main area – always full‑width, but shifted right only when sidebar is open */
+.main {
+  position: relative;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+/* 5. Shift the main content over when the sidebar is open */
+.layout--sidebar-open .main {
+  margin-left: 250px;
+}
+
+/* Sidebar base styles */
+.sidebar {
+  width: 250px;
+  background-color: #1a8f7f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar header (logo + close button) */
+.sidebar__header {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
-  background: linear-gradient(to right, #1abc9c, #16a085);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-
-/* Logo styling */
-.logo {
-  font-size: 24px;
-  font-weight: bold;
+.sidebar__logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.sidebar__close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
   color: #fff;
-}
-
-/* Spacer takes up remaining space */
-.spacer {
-  flex: 1;
-}
-
-/* Navigation styling */
-nav {
-  display: flex;
-  align-items: center;
-}
-
-/* Navigation link styling */
-/* nav {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 20px;
-  font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease;
-} */
-
-nav a:hover,
-nav a.active {
-  color: #f1f1f1;
-  transform: scale(1.05);
-  background-color: #033a32;
-}
-
-/* Logout button styling */
-nav button,
-a {
-  background: transparent;
-  display: inline-block;
-  border: 1px solid #fff;
-  margin: 10px;
-  color: #fff;
-  padding: 8px 16px;
-  font-size: 16px;
-  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
-nav button:hover {
-  background-color: #fff;
-  color: #1abc9c;
-  transform: scale(1.05);
+/* Sidebar navigation links */
+.sidebar__nav {
+  flex-grow: 1;
+  padding: 1rem 0;
+}
+.sidebar__link,
+.sidebar__logout {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.25rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+/* Active link styling in sidebar */
+.active {
+  background-color: rgba(255, 255, 255, 0.2); /* subtle highlight */
+  font-weight: 600; /* bolder text */
+  position: relative;
+  color: #fff; /* ensure text stays white */
+}
+
+/* Add a solid accent bar on the left of the active item */
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #fff; /* bright contrasting line */
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* Optionally, make hovered non-active links a bit lighter */
+.sidebar__link:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+}
+
+/* Header */
+.main__header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.main__toggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  margin-right: 1rem;
+  cursor: pointer;
+  color: #333;
+}
+.main__logo {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+/* Content */
+.main__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background-color: #f7f9fa;
 }

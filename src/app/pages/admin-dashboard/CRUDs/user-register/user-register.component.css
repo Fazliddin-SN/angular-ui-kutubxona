@@ -1,0 +1,71 @@
+/* Admin Registration Form Container */
+.admin-register-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-register-container h2 {
+  font-family: "Georgia", serif;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form Group Spacing */
+.admin-register-container .form-group {
+  margin-bottom: 20px;
+}
+
+.admin-register-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: bold;
+}
+
+/* Input & Select Fields */
+.admin-register-container input,
+.admin-register-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.admin-register-container input:focus,
+.admin-register-container select:focus {
+  outline: none;
+  border-color: #1abc9c;
+}
+
+/* Error Message Styling */
+.admin-register-container .error-msg small {
+  display: block;
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Submit Button Styling */
+.admin-register-container button {
+  display: inline;
+  padding: 12px;
+  margin: 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1abc9c;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-register-container button[type="submit"]:hover {
+  background-color: #16a085;
+}

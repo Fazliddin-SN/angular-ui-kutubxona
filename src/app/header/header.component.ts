@@ -11,7 +11,7 @@ import { LandingComponent } from '../pages/landing/landing.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, NgIf],
+  imports: [RouterLink, RouterLinkActive, NgIf, RouterOutlet],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -28,6 +28,12 @@ export class HeaderComponent {
 
   get userRole(): string | null {
     return this.authService.getUserRole();
+  }
+
+  sidebarOpen = false;
+  // toggling side bar
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   // user logout function
