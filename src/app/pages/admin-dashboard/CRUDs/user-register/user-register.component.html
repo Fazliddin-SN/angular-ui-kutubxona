@@ -1,1 +1,155 @@
-<p>user-register works!</p>
+<div class="admin-register-container">
+  <h2>Yangi foydalanuvchi qo'shish</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Full Name -->
+    <div class="form-group">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" formControlName="fullname" />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('fullname')?.touched &&
+          registerForm.get('fullname')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('fullname')?.errors?.['required']">
+          Ism Familiya bo'sh bo'lmasligi kerak.
+        </small>
+        <small *ngIf="registerForm.get('fullname')?.errors?.['minlength']">
+          Ism Familiya kamida 4 harfdan iborat bo'lishi kerak.
+        </small>
+      </div>
+    </div>
+
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username" />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('username')?.touched &&
+          registerForm.get('username')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('username')?.errors?.['required']">
+          Foydalanuvchi nomi talab qilinadi.
+        </small>
+        <small *ngIf="registerForm.get('username')?.errors?.['minlength']">
+          Foydalanuvchi nomi kamida 3 harfdan iborat bo'lishi kerak.
+        </small>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email" />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('email')?.touched &&
+          registerForm.get('email')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">
+          Email talab qilinadi.
+        </small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">
+          Iltimos yaroqli email kiriting.
+        </small>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('password')?.touched &&
+          registerForm.get('password')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">
+          Parol talab qilinadi.
+        </small>
+        <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+          Parol kamida 6 harf belgidan va bitta katta harf va raqamdan iborat
+          bo'lishi kerak.
+        </small>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address">Manzil</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        formControlName="address"
+      />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('address')?.touched &&
+          registerForm.get('address')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('address')?.errors?.['required']">
+          Manzil talab qilinadi.
+        </small>
+      </div>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-group">
+      <label for="phone_number">Tel:</label>
+      <input
+        type="text"
+        id="phone_number"
+        name="phone_number"
+        formControlName="phone_number"
+        placeholder="+998955555555"
+      />
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('phone_number')?.touched &&
+          registerForm.get('phone_number')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('phone_number')?.errors?.['required']">
+          Telefon raqam talab qilinadi.
+        </small>
+      </div>
+    </div>
+
+    <!-- Role Selection -->
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select id="role" formControlName="role">
+        <option *ngFor="let role of roles" [value]="role">
+          {{ role }}
+        </option>
+      </select>
+      <div
+        class="error-msg"
+        *ngIf="
+          registerForm.get('role')?.touched && registerForm.get('role')?.invalid
+        "
+      >
+        <small *ngIf="registerForm.get('role')?.errors?.['required']">
+          Role is required.
+        </small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Ro'yxatdan o'tkazish</button>
+    <button (click)="onCloseForm()">Bekor qilish</button>
+    <p *ngIf="errorMessage">{{ errorMessage() }}</p>
+  </form>
+</div>

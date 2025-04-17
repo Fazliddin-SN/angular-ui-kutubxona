@@ -1,1 +1,7 @@
-<p>admin-dashboard works!</p>
+<div class="user-register-prompt">
+  <h2>Yangi foydalanuvchi qo'shish uchun bosing</h2>
+  <button (click)="showForm()">Foydalanuvchi qo'shish</button>
+  <div *ngIf="formIsVisible" class="user-register-form">
+    <app-user-register (close)="showForm()"></app-user-register>
+  </div>
+</div>

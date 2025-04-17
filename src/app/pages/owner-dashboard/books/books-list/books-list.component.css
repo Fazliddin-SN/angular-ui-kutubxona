@@ -1,0 +1,101 @@
+/* Container for horizontal scrolling */
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+/* Base table */
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header */
+.books-table thead {
+  background: #16a085;
+  color: #fff;
+}
+.books-table thead th {
+  padding: 12px 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Body rows */
+.books-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+.books-table tbody tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.books-table tbody tr:hover {
+  background: #e2f7f1;
+}
+
+/* Cells */
+.books-table td {
+  padding: 12px 16px;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Center the actions column */
+.books-table td.actions {
+  text-align: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+/* Icon spacing */
+.btn i {
+  margin-right: 6px;
+  font-size: 1rem;
+}
+
+/* Edit button */
+.btn.edit {
+  color: #2980b9;
+}
+.btn.edit:hover {
+  background-color: rgba(41, 128, 185, 0.1);
+}
+
+/* Delete button */
+.btn.delete {
+  color: #c0392b;
+}
+.btn.delete:hover {
+  background-color: rgba(192, 57, 43, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .books-table thead th,
+  .books-table td {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 4px 6px;
+  }
+  .btn i {
+    margin-right: 4px;
+    font-size: 0.9rem;
+  }
+}

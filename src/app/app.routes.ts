@@ -8,18 +8,21 @@ import { AuthGuardService } from './services/auth.guard.service';
 import { RoleGuardService } from './services/role.guard.service';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
-import { OwnerDashboardComponent } from './pages/owner-dashboard/owner-dashboard.component';
-import { LayoutComponent } from './layout/layout.component';
+
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 
 export const routes: Routes = [
-  { path: '', component: LandingComponent },
+  // 1) Redirect empty to /main
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+
+  // 2) Then the “main” / landing page
+  { path: 'main', component: LandingComponent },
+
+  // 3) Auth pages
   { path: 'login', component: LoginComponent },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
+  { path: 'register', component: RegisterComponent },
+
   // route path for different user according to their roles
   {
     path: 'dashboard/admin',
@@ -35,9 +38,10 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard/owner',
-    component: OwnerDashboardComponent,
-    canActivate: [AuthGuardService, RoleGuardService],
-    data: { roles: ['owner'] },
+    loadChildren: () =>
+      import('./pages/owner-dashboard/owner-dashboard.module').then(
+        (m) => m.OwnerDashboardModule
+      ),
   },
 
   {

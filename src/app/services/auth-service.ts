@@ -1,16 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { GlobalConfigService } from '../global-config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-// decoded token interface (type)
-export interface DecodedToken {
-  id: string;
-  email: string;
-  role: 'user' | 'admin' | 'owner';
-  exp: number;
-}
-
+import { User } from '../pages/admin-dashboard/CRUDs/user-register/user.model';
+import { DecodedToken } from '../interfaces/token.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,16 +16,18 @@ export class AuthService {
 
   constructor(private config: GlobalConfigService) {
     this.baseUrl = this.config.baseUrl;
-    console.log(this.baseUrl);
+    // console.log(this.baseUrl);
   }
   // Check if token exists initially
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
-
+  // login method
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/login`, { email, password });
   }
+
+  //sign method for guests
   register(
     full_name: string,
     user_name: string,
@@ -48,6 +44,33 @@ export class AuthService {
       address,
       phone_number,
     });
+  }
+
+  // registering new users with roles 'admin', 'user', and 'owner'
+  registerUser(userData: Partial<User>): Observable<any> {
+    const { fullname, username, email, password, address, phone_number, role } =
+      userData;
+
+    // Retrieve token from localStorage or another source
+    const token = localStorage.getItem('token');
+
+    // Create HttpHeaders and attach the token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // adjust if your API expects a different format
+    });
+    return this.http.post(
+      `${this.baseUrl}/auth/sign-up`,
+      {
+        full_name: fullname,
+        user_name: username,
+        email,
+        password,
+        address,
+        phone_number,
+        role,
+      },
+      { headers }
+    );
   }
 
   // getting token from localstorage

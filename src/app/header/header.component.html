@@ -1,36 +1,65 @@
-<div class="header-container">
-  <span class="logo" routerLink="/" routerLinkActive="active"
-    >Library Management System</span
-  >
-  <!-- Flex spacer pushes nav to the right -->
-  <span class="spacer"></span>
-  <nav>
-    <a routerLink="/login" routerLinkActive="active" *ngIf="!isAuthenticated"
-      >Login</a
-    >
-    <a routerLink="/register" routerLinkActive="active" *ngIf="!isAuthenticated"
-      >Register</a
-    >
-    <!-- Show dashboard links by role when logged in -->
-    <a
-      routerLink="/dashboard/user"
-      routerLinkActive="active"
-      *ngIf="userRole === 'user'"
-      >Dashboard</a
-    >
-    <a
-      routerLink="/dashboard/owner"
-      routerLinkActive="active"
-      *ngIf="userRole === 'owner'"
-      >My Library</a
-    >
-    <a
-      routerLink="/dashboard/admin"
-      routerLinkActive="active"
-      *ngIf="userRole === 'admin'"
-      >Admin Panel</a
-    >
-    <!-- Logout button visible when logged in -->
-    <button (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>
-  </nav>
+<div class="layout" [class.layout--sidebar-open]="sidebarOpen">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar__header">
+      <span class="sidebar__logo">Library</span>
+      <button class="sidebar__close" (click)="toggleSidebar()">×</button>
+    </div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__link" routerLink="/" routerLinkActive="active">Home</a>
+      <a
+        class="sidebar__link"
+        routerLink="login"
+        routerLinkActive="active"
+        *ngIf="!isAuthenticated"
+        >Login</a
+      >
+      <a
+        class="sidebar__link"
+        routerLink="register"
+        routerLinkActive="active"
+        *ngIf="!isAuthenticated"
+        >Register</a
+      >
+      <a
+        class="sidebar__link"
+        routerLink="/dashboard/user"
+        routerLinkActive="active"
+        *ngIf="userRole === 'user'"
+        >Dashboard</a
+      >
+      <a
+        class="sidebar__link"
+        routerLink="/dashboard/owner"
+        routerLinkActive="active"
+        *ngIf="userRole === 'owner'"
+        >My Library</a
+      >
+      <a
+        class="sidebar__link"
+        routerLink="/dashboard/admin"
+        routerLinkActive="active"
+        *ngIf="userRole === 'admin'"
+        >Admin Panel</a
+      >
+      <button
+        class="sidebar__logout"
+        (click)="onLogout()"
+        *ngIf="isAuthenticated"
+      >
+        Logout
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main">
+    <header class="main__header">
+      <button class="main__toggle" (click)="toggleSidebar()">☰</button>
+      <a class="main__logo" routerLink="/">Library Management System</a>
+    </header>
+    <section class="main__content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
 </div>
