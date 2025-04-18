@@ -97,7 +97,7 @@ export class UserRegisterComponent implements OnInit {
       subscription.unsubscribe();
     });
   }
-  // email is taken to pass to library-register component
+  // email is taken to pass to libra
   enteredEmail: string = '';
   // onSubmit method to send form data to backend via authService
   onSubmit(): void {

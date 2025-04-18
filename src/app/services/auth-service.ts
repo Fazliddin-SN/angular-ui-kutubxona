@@ -4,7 +4,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { User } from '../pages/admin-dashboard/CRUDs/user-register/user.model';
+<<<<<<< HEAD
 import { DecodedToken } from '../interfaces/token.model';
+=======
+// decoded token interface (type)
+export interface DecodedToken {
+  id: string;
+  email: string;
+  role: 'user' | 'admin' | 'owner';
+  exp: number;
+}
+
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 @Injectable({
   providedIn: 'root',
 })
@@ -62,7 +73,10 @@ export class AuthService {
       `${this.baseUrl}/auth/sign-up`,
       {
         full_name: fullname,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
         user_name: username,
         email,
         password,
@@ -74,6 +88,7 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
   // registering new library for new user
   registerLib(user_email: string, library_name: string): Observable<any> {
     const token = localStorage.getItem('token');
@@ -92,6 +107,8 @@ export class AuthService {
     );
   }
 
+=======
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
   // getting token from localstorage
   getToken(): string | null {
     return localStorage.getItem('token');

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Layout wrapper */
 .layout {
   display: flex;
@@ -28,6 +29,61 @@
 }
 
 /* Sidebar header */
+=======
+/* 1. Make the layout wrapper only responsible for stacking main + allowing sidebar-open state */
+.layout {
+  /* no more flex-calculations of aside width */
+  position: relative; /* to scope absolutely-positioned sidebar */
+  /* height: 100vw;
+  overflow: hidden; */
+}
+
+/* 2. Sidebar – absolutely positioned off-canvas */
+.sidebar {
+  position: absolute; /* remove from document flow */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #1a8f7f;
+  color: #fff;
+  transform: translateX(-100%); /* fully hidden to the left */
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+/* 3. When open, slide sidebar in */
+.layout--sidebar-open .sidebar {
+  transform: translateX(0);
+}
+
+/* 4. Main area – always full‑width, but shifted right only when sidebar is open */
+.main {
+  position: relative;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+/* 5. Shift the main content over when the sidebar is open */
+.layout--sidebar-open .main {
+  margin-left: 250px;
+}
+
+/* Sidebar base styles */
+.sidebar {
+  width: 250px;
+  background-color: #1a8f7f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar header (logo + close button) */
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 .sidebar__header {
   display: flex;
   align-items: center;
@@ -45,6 +101,7 @@
   font-size: 1.5rem;
   color: #fff;
   cursor: pointer;
+<<<<<<< HEAD
   transition: color 0.2s;
 }
 .sidebar__close:hover {
@@ -56,13 +113,25 @@
   flex: 1;
   padding: 1rem 0;
   overflow-y: auto;
+=======
+}
+
+/* Sidebar navigation links */
+.sidebar__nav {
+  flex-grow: 1;
+  padding: 1rem 0;
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 }
 .sidebar__link,
 .sidebar__logout {
   display: block;
   width: 100%;
   padding: 0.75rem 1.25rem;
+<<<<<<< HEAD
   margin: 0.25rem 0;
+=======
+  margin-bottom: 0.25rem;
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
   background: transparent;
   border: none;
   text-align: left;
@@ -70,6 +139,7 @@
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
+<<<<<<< HEAD
   transition: background 0.2s, padding-left 0.2s;
   cursor: pointer;
 }
@@ -86,36 +156,73 @@
   position: relative;
 }
 .sidebar__link.active::before {
+=======
+  transition: background 0.2s;
+}
+
+/* Active link styling in sidebar */
+.active {
+  background-color: rgba(255, 255, 255, 0.2); /* subtle highlight */
+  font-weight: 600; /* bolder text */
+  position: relative;
+  color: #fff; /* ensure text stays white */
+}
+
+/* Add a solid accent bar on the left of the active item */
+.active::before {
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 4px;
+<<<<<<< HEAD
   background-color: #fff;
   border-radius: 0 2px 2px 0;
+=======
+  background-color: #fff; /* bright contrasting line */
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* Optionally, make hovered non-active links a bit lighter */
+.sidebar__link:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 }
 
 /* Main area */
 .main {
   flex: 1;
+<<<<<<< HEAD
   margin-left: 0;
+=======
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
   display: flex;
   flex-direction: column;
   transition: margin-left 0.3s ease;
 }
+<<<<<<< HEAD
 .layout.layout--sidebar-open .main {
   margin-left: 240px;
 }
+=======
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 
 /* Header */
 .main__header {
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
+<<<<<<< HEAD
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 500;
+=======
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 }
 .main__toggle {
   font-size: 1.5rem;
@@ -124,10 +231,13 @@
   margin-right: 1rem;
   cursor: pointer;
   color: #333;
+<<<<<<< HEAD
   transition: color 0.2s;
 }
 .main__toggle:hover {
   color: #000;
+=======
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 }
 .main__logo {
   font-size: 1.125rem;

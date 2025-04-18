@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Book } from '../../../../interfaces/book.model';
 import { BookService } from '../../../../services/book.service';
@@ -46,4 +47,16 @@ export class BooksListComponent implements OnInit {
   delete(bookId: string) {
     this.router.navigate([bookId, 'delete'], { relativeTo: this.route });
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-books-list',
+  imports: [],
+  templateUrl: './books-list.component.html',
+  styleUrl: './books-list.component.css'
+})
+export class BooksListComponent {
+
+>>>>>>> 079113d34c5c98610fffa2d38b1df42e0c1e3b0b
 }
