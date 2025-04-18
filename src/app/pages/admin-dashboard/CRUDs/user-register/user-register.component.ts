@@ -41,7 +41,7 @@ export class UserRegisterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private authService = inject(AuthService);
   private router = inject(Router);
-
+  hasLibrary = false;
   // Define an array for role options
   roles: Role[] = ['user', 'owner', 'admin'];
   // to store and display error messages
@@ -97,7 +97,8 @@ export class UserRegisterComponent implements OnInit {
       subscription.unsubscribe();
     });
   }
-
+  // email is taken to pass to library-register component
+  enteredEmail: string = '';
   // onSubmit method to send form data to backend via authService
   onSubmit(): void {
     // console.log(this.registerForm.value);
@@ -106,6 +107,12 @@ export class UserRegisterComponent implements OnInit {
       this.errorMessage.set('Kerakli malumotlarni kiriting.');
       return;
     }
+    // if user registered as owner, we should create a library
+    if (this.registerForm.value.role === 'owner') {
+      this.hasLibrary = true;
+      this.enteredEmail = this.registerForm.value.email;
+    }
+
     const subscription = this.authService
       .registerUser(this.registerForm.value)
       .subscribe({
@@ -115,7 +122,13 @@ export class UserRegisterComponent implements OnInit {
             text: "Yangi foydalanuvchi muvaffaqiyatli ro'yxatdan o'tkazildi.",
             timer: 1000,
           }).then(() => {
-            this.router.navigate(['/']);
+            if (this.hasLibrary) {
+              this.router.navigate(['/library-register'], {
+                queryParams: { email: this.enteredEmail },
+              });
+            } else {
+              this.router.navigate(['/']);
+            }
           });
         },
         error: (err) => {

@@ -11,6 +11,7 @@ import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.co
 
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { LibraryRegisterComponent } from './pages/admin-dashboard/CRUDs/library-register/library-register.component';
 
 export const routes: Routes = [
   // 1) Redirect empty to /main
@@ -21,8 +22,16 @@ export const routes: Routes = [
 
   // 3) Auth pages
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'library-register',
+    component: LibraryRegisterComponent,
+    canActivate: [AuthGuardService, RoleGuardService],
+    data: { roles: ['admin'] },
+  },
   // route path for different user according to their roles
   {
     path: 'dashboard/admin',

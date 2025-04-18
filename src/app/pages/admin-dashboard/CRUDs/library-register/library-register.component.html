@@ -1,0 +1,50 @@
+<div class="register-form">
+  <h2 class="form-title">Foydalanuvchi Uchun Kutubxona Yarating!</h2>
+  <form [formGroup]="libForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        formControlName="email"
+        [readOnly]="isEmailReadonly"
+        class="form-input"
+      />
+      <div
+        class="error-msg"
+        *ngIf="libForm.get('email')?.touched && libForm.get('email')?.invalid"
+      >
+        <small *ngIf="libForm.get('email')?.errors?.['required']"
+          >Email kiritilishi shart</small
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lib_name">Kutubxona Nomi:</label>
+      <input
+        type="text"
+        id="lib_name"
+        name="lib_name"
+        formControlName="library_name"
+        class="form-input"
+      />
+      <div
+        class="error-msg"
+        *ngIf="
+          libForm.get('library_name')?.touched &&
+          libForm.get('library_name')?.invalid
+        "
+      >
+        <small *ngIf="libForm.get('library_name')?.errors?.['required']">
+          Kutubxona nomi talab qilinadi.
+        </small>
+      </div>
+    </div>
+    <p class="form-actions">
+      <button type="submit" [disabled]="libForm.invalid" class="submit-btn">
+        Kutubxona Yaratish
+      </button>
+    </p>
+  </form>
+</div>

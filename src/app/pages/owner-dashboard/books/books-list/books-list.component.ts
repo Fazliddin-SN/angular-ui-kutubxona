@@ -1,8 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Book } from '../../../../interfaces/book.model';
 import { BookService } from '../../../../services/book.service';
-import { DatePipe } from '@angular/common';
-import { NewBookComponent } from '../new-book/new-book.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -30,7 +28,6 @@ export class BooksListComponent implements OnInit {
       },
       error: (err) => {
         //
-
         this.errorMessage = err.error.error;
       },
     });

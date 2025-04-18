@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { OwnerDashboardComponent } from './owner-dashboard.component';
 import { BooksListComponent } from './books/books-list/books-list.component';
 import { NewBookComponent } from './books/new-book/new-book.component';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { OwnerDashboardRoutingModule } from './owner-dashboard.routing';
 import { UpdateBookComponent } from './books/update-book/update-book.component';
 import { DeleteBookComponent } from './books/delete-book/delete-book.component';
@@ -23,6 +23,8 @@ import { RouterLink } from '@angular/router';
     DatePipe,
     OwnerDashboardRoutingModule,
     RouterLink,
+    NgIf,
+    NgFor,
   ],
 })
 export class OwnerDashboardModule {}

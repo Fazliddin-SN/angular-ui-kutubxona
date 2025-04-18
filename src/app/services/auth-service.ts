@@ -62,6 +62,7 @@ export class AuthService {
       `${this.baseUrl}/auth/sign-up`,
       {
         full_name: fullname,
+
         user_name: username,
         email,
         password,
@@ -70,6 +71,24 @@ export class AuthService {
         role,
       },
       { headers }
+    );
+  }
+
+  // registering new library for new user
+  registerLib(user_email: string, library_name: string): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    // Create HttpHeaders and attach the token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // adjust if your API expects a different format
+    });
+
+    return this.http.post(
+      `${this.baseUrl}/library`,
+      { library_name, user_email },
+      {
+        headers,
+      }
     );
   }
 
